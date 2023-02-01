@@ -10,5 +10,11 @@ if url:
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     paragraphs = soup.find_all("p", {"class": "pw-post-body-paragraph"})
-    for p in paragraphs:
-        st.write(p.get_text(), select=True)
+    article_content = "\n".join([p.get_text() for p in paragraphs])
+
+    # Display the article content
+    text_area = st.text_area("Article content", article_content, key="content")
+    
+    # Add a select all button
+    if st.button("Select all"):
+        text_area.text.set(article_content)
