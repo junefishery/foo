@@ -12,9 +12,9 @@ if url:
     paragraphs = soup.find_all("p", {"class": "pw-post-body-paragraph"})
     article_content = "\n".join([p.get_text() for p in paragraphs])
 
-    # Display the article content
-    text_area = st.text_area("Article content", article_content, key="content")
+    # Create a text area widget
+    text_area = st.text_area("Article content", article_content)
     
     # Add a select all button
     if st.button("Select all"):
-        text_area.text.set(article_content)
+        text_area.text = article_content
