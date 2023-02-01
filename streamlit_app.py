@@ -1,15 +1,26 @@
-import wikipediaapi
 import streamlit as st
+import requests
+from bs4 import BeautifulSoup
 
-wiki_wiki = wikipediaapi.Wikipedia(
-        language='en',
-        extract_format=wikipediaapi.ExtractFormat.WIKI
-)
+def scrape_wikipedia():
+    # Make a GET request to the Wikipedia home page
+    res = requests.get('https://en.wikipedia.org/wiki/Special:Random')
+
+    # Parse the HTML with BeautifulSoup
+    soup = BeautifulSoup(res.text, 'html.parser')
+
+    # Extract the title and content of the article
+    title = soup.select('h1')[0].text
+    content = soup.select('div.mw-parser-output')[0].text
+
+    return title, content
 
 st.title("Random Wikipedia Article")
 
-if st.button("Get Random Article"):
-    random_title = wiki_wiki.random()
-    page = wiki_wiki.page(random_title)
-    st.write("Title: ", page.title)
-    st.write("Summary: ", page.summary[0:500] + "...")
+title, content = scrape_wikipedia()
+
+st.write("Title:", title)
+st.write("Content:", content)
+
+if st.button("Refresh"):
+    title, content = scrape_wikipedia()
