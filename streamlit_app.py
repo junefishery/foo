@@ -12,6 +12,4 @@ if url:
     paragraphs = soup.find_all("p", {"class": "pw-post-body-paragraph"})
     article_content = "\n\n".join([p.get_text() for p in paragraphs])
     st.write("Article content:", unsafe_allow_html=True)
-    text_area = st.text_area(article_content)
-    if st.button("Select text"):
-        text_area.select()
+    st.text_area(article_content)
