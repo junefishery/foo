@@ -10,9 +10,5 @@ if url:
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     paragraphs = soup.find_all("p", {"class": "pw-post-body-paragraph"})
-    select_all = st.button("Select All")
-    if select_all:
-        st.write("".join([p.get_text() for p in paragraphs]))
-    else:
-        for p in paragraphs:
-            st.write(p.get_text())
+    for p in paragraphs:
+        st.write(p.get_text(), select=True)
