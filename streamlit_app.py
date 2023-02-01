@@ -9,5 +9,6 @@ url = st.text_input("Enter the URL of the Medium article:")
 if url:
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    article_content = soup.find("div", {"class": "section-inner"}).get_text()
-    st.write(article_content)
+    paragraphs = soup.find_all("p", {"class": "pw-post-body-paragraph"})
+    article_content = [p.get_text() for p in paragraphs]
+    st.write("\n".join(article_content))
