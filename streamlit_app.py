@@ -10,5 +10,5 @@ if url:
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     paragraphs = soup.find_all("p", {"class": "pw-post-body-paragraph"})
-    article_content = [p.get_text() for p in paragraphs]
-    st.write("\n".join(article_content))
+    for p in paragraphs:
+        st.write(p.get_text())
