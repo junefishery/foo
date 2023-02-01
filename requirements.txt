@@ -1,1 +1,3 @@
-wikipediaapi
+streamlit
+beautifulsoup4
+requests
