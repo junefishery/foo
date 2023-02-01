@@ -1,5 +1,3 @@
-!pip install wikipedia-api
-
 import wikipediaapi
 import streamlit as st
 
