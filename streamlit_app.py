@@ -15,12 +15,12 @@ def scrape_wikipedia():
 
     return title, content
 
-st.title("Random Wikipedia Article")
-
 title, content = scrape_wikipedia()
 
-st.write("Title:", title)
-st.write("Content:", content)
-
+st.title("Random Wikipedia Article")
 if st.button("Refresh"):
     title, content = scrape_wikipedia()
+
+st.write("")
+st.write("### Title:", title, "")
+st.write("Content:", content)
